@@ -39,7 +39,7 @@ def build_preprocessor():
     ordinal_cols = list(ORDINAL_COLS.keys())
 
     ordinal_transformer = Pipeline([
-        ('imputer', IterativeImputer(random_state=42, max_iter=10)),
+        ('imputer', SimpleImputer(strategy='most_frequent')),
         ('scaler', OrdinalEncoder(
             categories=categories,
             handle_unknown='use_encoded_value',

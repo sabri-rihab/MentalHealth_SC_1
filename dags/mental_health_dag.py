@@ -31,6 +31,9 @@ def task_evaluate_model():
 
     metrics = evaluate_model(X_test, y_test)
     print(f"Model Accuracy : {metrics['accuracy']:.4f}")
+    print(f"Model f1_score : {metrics['f1_score']:.4f}")
+    print(f"Model classification report : {metrics['report']}")
+    print(f"Model confusion_matrix : {metrics['confusion_matrix']}")
 
 
 default_args = {
@@ -39,7 +42,7 @@ default_args = {
 }
 with DAG(
     'student_mental_health_training_pipline',
-    start_date=datetime(2026,12,12),
+    start_date=datetime(2026, 11, 15),
     schedule = '@weekly',
     catchup= False,
     default_args = default_args

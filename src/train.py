@@ -44,3 +44,15 @@ def train_and_optimize(X_train, y_train):
 def save_model(modle_pipline, path=MODEL_PATH):
     path.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(modle_pipline, path)
+
+
+if __name__ == '__main__':
+    print("Loading cleaned dataset...")
+    df = pd.read_csv(CLEANED_DATA_PATH)
+    print("Splitting dataset...")
+    X_train, X_test, y_train, y_test = split_dataset(df)
+    print("Training and optimizing model with GridSearchCV...")
+    best_pipeline = train_and_optimize(X_train, y_train)
+    print(f"Saving model to {MODEL_PATH}...")
+    save_model(best_pipeline)
+    print("Model successfully trained and saved!")
