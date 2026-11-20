@@ -58,6 +58,21 @@ services:
         airflow scheduler &
         exec airflow webserver
 
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    image: mental-health-streamlit:latest
+    container_name: streamlit
+    restart: always
+    ports:
+      - "${STREAMLIT_PORT:-8501}:8501"
+    volumes:
+      - ./app:/app/app
+      - ./model:/app/model
+    depends_on:
+      - airflow
+
 volumes:
   postgres-db-volume:
   airflow-logs:
